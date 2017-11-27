@@ -1,0 +1,27 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "vmName": {
+      "value": "kuvinod-vm02"
+    },
+    "vmSize": {
+      "value": "Standard_B2s"
+    },
+    "location": {
+      "value": "southcentralus"
+    },
+    "adminUsername": {
+      "value": "kuvinod"
+    },
+    "adminPassword": {
+      "value": "Password123."
+    },
+    "dnsLabelPrefix": {
+      "value": "kuvinod-arm-dns02"
+    },
+    "windowsOSVersion": {
+      "value": "2016-Datacenter"
+    }
+  }
+}
