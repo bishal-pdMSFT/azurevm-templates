@@ -34,15 +34,9 @@
         "description": "Password for the Virtual Machine."
       }
     },
-    "dnsLabelPrefix": {
-      "type": "string",
-      "metadata": {
-        "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-      }
-    },
     "windowsOSVersion": {
       "type": "string",
-      "defaultValue": "2016-Datacenter",
+      "defaultValue": "2016-Datacenter-smalldisk",
       "allowedValues": [
         "2012-R2-Datacenter",
         "2016-Datacenter",
@@ -86,7 +80,7 @@
       "properties": {
         "publicIPAllocationMethod": "Dynamic",
         "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+          "domainNameLabel": "[concat(parameters('vmName'), '-dns')]"
         }
       }
     },

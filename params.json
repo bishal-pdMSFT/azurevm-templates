@@ -3,7 +3,7 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "vmName": {
-      "value": "kuvinod-vm02"
+      "value": ""
     },
     "vmSize": {
       "value": "Standard_B2s"
@@ -12,16 +12,13 @@
       "value": "southcentralus"
     },
     "adminUsername": {
-      "value": "kuvinod"
+      "value": ""
     },
     "adminPassword": {
-      "value": "Password123."
-    },
-    "dnsLabelPrefix": {
-      "value": "kuvinod-arm-dns02"
+      "value": ""
     },
     "windowsOSVersion": {
-      "value": "2016-Datacenter"
+      "value": "2016-Datacenter-smalldisk"
     }
   }
 }
