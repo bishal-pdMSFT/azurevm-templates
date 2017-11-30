@@ -254,7 +254,7 @@
         "typeHandlerVersion": "2.0",
         "autoUpgradeMinorVersion": true,
         "settings": {
-          "commandToExecute": "cmd /c \"powershell add-windowsfeature web-server -includeallsubfeature\""
+          "commandToExecute": "powershell add-windowsfeature web-server -includeallsubfeature"
         },
         "protectedSettings": {}
       }
