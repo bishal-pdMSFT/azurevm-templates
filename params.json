@@ -19,6 +19,9 @@
     },
     "windowsOSVersion": {
       "value": "2016-Datacenter-smalldisk"
+    },
+    "dscExtensionWMFVersion": {
+      "value": "4.0"
     }
   }
 }
