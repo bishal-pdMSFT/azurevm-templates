@@ -46,7 +46,14 @@
       "metadata": {
         "description": "The Windows version for the VM."
       }
-    }
+    },
+    "_artifactsLocation": {
+      "type": "string",
+      "metadata": {
+        "description": "The base URI where artifacts required by this template are located. When the template is deployed using the accompanying scripts, a private location in the subscription will be used and this value will be automatically generated."
+      },
+      "defaultValue": "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/iis-2vm-sql-1vm/"
+    },
   },
   "variables": {
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'savm')]",
@@ -58,7 +65,10 @@
     "networkSecurityGroupName": "[concat(parameters('vmName'), '-nsg')]",
     "virtualNetworkName": "[concat(parameters('vmName'), '-vnet')]",
     "vnetId": "[resourceId(resourceGroup().name, 'Microsoft.Network/virtualNetworks', variables('virtualNetworkName'))]",
-    "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]"
+    "subnetRef": "[concat(variables('vnetId'), '/subnets/', variables('subnetName'))]",
+    "vmExtensionName": "dscExtension",
+    "modulesUrl": "[concat(parameters('_artifactsLocation'), 'scripts/WebServerConfig.ps1.zip')]",
+    "configurationFunction": "WebServerConfig.ps1\\WebServerConfig"
   },
   "resources": [
     {
@@ -221,6 +231,29 @@
             "storageUri": "[reference(resourceId(resourceGroup().name, 'Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints['blob']]"
           }
         }
+      }
+    },
+    {
+      "type": "Microsoft.Compute/virtualMachines/extensions",
+      "name": "[concat(variables('vmName'), '/', variables('vmExtensionName'))]",
+      "apiVersion": "2015-06-15",
+      "location": "[resourceGroup().location]",
+      "dependsOn": [
+        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+      ],
+      "properties": {
+        "publisher": "Microsoft.Powershell",
+        "type": "DSC",
+        "typeHandlerVersion": "2.19",
+        "autoUpgradeMinorVersion": true,
+        "settings": {
+          "ModulesUrl": "[variables('modulesUrl')]",
+          "SasToken": "",
+          "ConfigurationFunction": "[variables('configurationFunction')]",
+          "wmfVersion": "4.0",
+          "Properties": {}
+        },
+        "protectedSettings": {}
       }
     }
   ],
